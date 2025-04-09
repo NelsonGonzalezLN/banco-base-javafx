@@ -1,5 +1,6 @@
 package co.edu.uniquindio.banco.controlador;
 
+import co.edu.uniquindio.banco.modelo.entidades.Banco;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
  * @author caflorezvi
  */
 public class InicioControlador {
+    private final Banco banco = Banco.getInstancia();
 
     /**
      * Método que permite ir a la vista de Iniciar Sesión

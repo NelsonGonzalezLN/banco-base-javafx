@@ -25,14 +25,7 @@ public class RegistroControlador {
     @FXML
     private PasswordField txtPassword;
 
-    private final Banco banco;
-
-    /**
-     * Constructor de la clase, inicializa el banco
-     */
-    public RegistroControlador(){
-        banco = new Banco();
-    }
+    private final Banco banco = Banco.getInstancia();
 
     /**
      * Método que se ejecuta al presionar el botón de registrarse
@@ -78,5 +71,13 @@ public class RegistroControlador {
     public void cerrarVentana(){
         Stage stage = (Stage) txtIdentificacion.getScene().getWindow();
         stage.close();
+    }
+
+    private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
     }
 }

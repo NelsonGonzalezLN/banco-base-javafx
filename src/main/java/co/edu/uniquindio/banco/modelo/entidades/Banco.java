@@ -23,11 +23,37 @@ public class Banco {
 
     private List<Usuario> usuarios;
     private List<BilleteraVirtual> billeteras;
+    public static Banco INSTANCIA;
 
-    public Banco(){
+    public Banco() {
         this.usuarios = new ArrayList<>();
         this.billeteras = new ArrayList<>();
+        try {
+            registrarUsuario("123","Nadie","Nowhere","nobody@gmail.com","123");
+            registrarUsuario("321","Ninguno","Aquí","nadie@gmail.com","321");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        for (BilleteraVirtual billetera : billeteras) {
+            try {
+                recargarBilletera(billetera.getNumero(), 1000000);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        for (Usuario usuario : usuarios) {
+            System.out.println(usuario.getNombre()+": Id:" + usuario.getId()+ " Contraseña: " + usuario.getPassword());
+            System.out.println("Nuemero de cuenta: " + buscarBilleteraUsuario(usuario.getId()).getNumero());
+        }
     }
+
+    public static Banco getInstancia(){
+        if(INSTANCIA == null){
+            INSTANCIA = new Banco();
+        }
+        return INSTANCIA;
+    }
+
 
     /**
      * Permite registrar un usuario en el banco y crear su billetera
@@ -241,5 +267,12 @@ public class Banco {
             throw new Exception("La billetera no existe");
         }
         return billetera.obtenerPorcentajeGastosIngresos(mes, anio);
+    }
+
+    public boolean comprobarExistenciaUsuario(String numeroBilletera) {
+        for (BilleteraVirtual billetera:billeteras) {
+            if (billetera.getNumero().equals(numeroBilletera)) return true;
+        }
+        return false;
     }
 }

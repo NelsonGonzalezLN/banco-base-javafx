@@ -15,7 +15,6 @@ public class BancoApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
         FXMLLoader loader = new FXMLLoader(BancoApp.class.getResource("/inicio.fxml"));
         Parent parent = loader.load();
 
@@ -29,4 +28,5 @@ public class BancoApp extends Application {
     public static void main(String[] args) {
         launch(BancoApp.class, args);
     }
+
 }
